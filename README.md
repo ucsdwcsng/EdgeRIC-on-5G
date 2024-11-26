@@ -22,7 +22,8 @@ sudo pip3 install hydra-core==1.1.0
 sudo pip3 uninstall -y protobuf
 sudo pip3 install protobuf==3.20.*
 
-git clone https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git
+git clone https://github.com/ucsdwcsng/EdgeRIC-on-5G.git
+cd EdgeRIC-on-5G
 git checkout srsran
 
 sudo ./make-ran-er.sh
