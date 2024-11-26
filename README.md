@@ -30,8 +30,36 @@ sudo ./make-ran-er.sh
 ```
 # Run the Network
 ## Core Network
-Install [open5Gs CN](https://open5gs.org/open5gs/docs/guide/01-quickstart/)    
-Use the config files in ``/open5gs`` - they should be fould in ``~/etc/open5gs`` of your machine  
+### Open5gs installation on Ubuntu 20
+Official documentation: [open5gs-quickstart](https://open5gs.org/open5gs/docs/guide/01-quickstart/)
+```bash
+sudo apt update
+sudo apt install gnupg
+curl -fsSL https://pgp.mongodb.com/server-6.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg --dearmor
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+sudo apt update
+sudo apt install -y mongodb-org
+sudo systemctl start mongod
+sudo systemctl enable mongod
+sudo add-apt-repository ppa:open5gs/latest
+sudo apt update
+sudo apt install open5gs
+
+# Install webui
+sudo apt update
+sudo apt install -y ca-certificates curl gnupg
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+
+ # Create deb repository
+NODE_MAJOR=20
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+
+ # Run Update and Install webui
+sudo apt update
+sudo apt install nodejs -y
+curl -fsSL https://open5gs.org/open5gs/assets/webui/install | sudo -E bash -
+``` 
 Run the following commands:  
 ```bash
 $ sudo systemctl restart open5gs-mmed
@@ -53,7 +81,14 @@ $ sudo systemctl restart open5gs-bsfd
 $ sudo systemctl restart open5gs-udrd
 $ sudo systemctl restart open5gs-webui
 ```
-Ensure all open5gs services are running ``ps aux | grep open5gs`` --> should show 16 processes  
+**how to know open5gs is installed?**  
+Run ``ps aux | grep open5gs`` --> this will show 16 active processes  
+**Where are open5gs configs located?**  
+``~/etc/open5gs`` --> folder contains all config files as .yaml --> to write, you need to change permission --> ``sudo chmod a+w ~/etc/open5gs/``  
+This repository contains all the open5gs configs used in folder ``open5gs``  
+**How to update UE data base on open5gs core network?**  
+``http://localhost:9999`` --> username: admin, password: 1423, add all UE sim credentials, press ``Add a subscriber``
+ 
 ## Radio Access Network
 
 ### Running in over the air mode 
