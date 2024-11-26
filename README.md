@@ -69,7 +69,7 @@ Update the UE config files, update ``[rf]`` section with the following, [refer h
 
 ### Running in zmq mode (virtual radios)
 
-**GNU flowgraph**  
+**GNU flowgraph - (Terminal 1)**  
 Run the GNU radio flowgraph - for two UEs run:
 ```bash
 python3 2ue-zmq-mode-23.04Mhz.py
@@ -78,11 +78,12 @@ Run the GNU radio flowgraph - for four UEs run:
 ```bash
 python3 4ue-zmq-mode-23.04Mhz.py
 ```
-**Run the srsRAN**
+**Run the srsRAN - (Terminal 2)**
 ```bash
 sudo ./run_gnb_multi_ue.sh
 ```
-**Run User Equipments (srsue) in zmq mode**  
+Press ``t`` to see the network metrics  
+**Run User Equipments (srsue) in zmq mode - - (Terminal 3)**  
 For two UEs, you can run the script:
 ```bash
 sudo ./run2ue-zmq-mode.sh
@@ -94,12 +95,12 @@ sudo ./run4ue-zmq-mode.sh
 You can also run the UEs in separate terminals
 
 ## Traffic Generation
-
+**(Terminal 4)**
 ```bash
 cd traffic-generator
 sudo ./iperf_server_2ues.sh
 ```
-
+**(Terminal 5)**
 ```bash
 cd traffic-generator
 sudo ./iperf_client_2ues.sh 13M 13M 1000
