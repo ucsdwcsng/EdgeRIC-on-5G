@@ -1,35 +1,5 @@
- 
-FAQs on the 5G infrastucture and issues faced at UCSD: refer [here](https://github.com/ucsdwcsng/5G-infrastructure.git) - let me know if you dont have access      
-
 **Current Implementation**  
 ![Image 1](./images/ER-09-09-24.png "This is image ER")  
-
-## Repository structure
-This repository is a collection of multiple repositories containing the code for ``srsue (4G)``, ``unmodified srsgnb``, ``modified srsgnb`` and ``edgeric`` - linked as git submodules  
-**Documentation for EdgeRIC compatible srsRAN** Located in [srsRAN-5G-ER](https://github.com/ucsdwcsng/srsRAN-5G-ER/tree/main)   
-**Documentation for EdgeRIC-v2** Located in [edgeric-v2](https://github.com/ucsdwcsng/EdgeRIC-v2/tree/master)     
-If you want to develop, refer [this](https://github.com/ucsdwcsng/EdgeRIC-5G?tab=readme-ov-file#how-to-use-this-repository)    
-```bash
-├── edgeric-v2        : Github repository for EdgeRIC
-├── srs-4G-UE         : Github repository for srsue (4G) - upstream is srsRAN Project
-├── srsRAN-5G-ER      : Github repository for srsRAN enb with EdgeRIC hooks - upstrean is srsRAN Project
-├── srsRAN_Project    : Github repository for vanilla srsRAN enb - upstream is srsRAN Project
-├── open5gs           : This folder contains all the open5gs CN config files used in this repository
-├── traffic-generator : This folder contains multiple traffic generator modules      
-```
-
-### How to use this Repository?
-1. You will most likely be developing srsRAN-5G-ER repository - go to ``https://github.com/ucsdwcsng/srsRAN-5G-ER/tree/main - branch main``    
-&nbsp;&nbsp;&nbsp;&nbsp; (a) Create a new branch - name: ``your-name`` - make sure it is up to date with the main branch, if you want to maintain different branches with different features, use multiple branches, name it as ``your-name-feature{i}``    
-&nbsp;&nbsp;&nbsp;&nbsp; (b) Push all your changes in this branch - use it for local development - make sure you update every week with detailed commits and document your code changes in a readme associated with this branch  
-&nbsp;&nbsp;&nbsp;&nbsp; (c) End of every month: We will resolve conflicts and merge with main    
-
-2. You will also most likely be developing EdgeRIC repository - go to ``https://github.com/ucsdwcsng/EdgeRIC-v2/tree/master - branch master``    
-&nbsp;&nbsp;&nbsp;&nbsp; (a) Create a new branch - name: ``your-name`` - make sure it is up to date with the main branch, if you want to maintain different branches with different features, use multiple branches, name it as ``your-name-feature{i}``    
-&nbsp;&nbsp;&nbsp;&nbsp; (b) Push all your changes in this branch - use it for local development - make sure you update every week with detailed commits and document your code changes in a readme associated with this branch  
-&nbsp;&nbsp;&nbsp;&nbsp; (c) End of every month: We will resolve conflicts and merge with main
-
-3. It is unlikely you will be updating any other file/ folder in this repository - if you do - follow the above steps - and maintain a readme in your branch
 
 ### Summary of all config file locations found in this repository
 ``/open5gs`` --> All open5gs configs  
@@ -45,7 +15,7 @@ If you want to develop, refer [this](https://github.com/ucsdwcsng/EdgeRIC-5G?tab
 
 For a full set of allowed configs from srsRAN, refer [here](https://docs.srsran.com/projects/project/en/latest/user_manuals/source/config_ref.html)
 
-## Build the EdgeRIC compatible network
+## Build the EdgeRIC compatible srsRAN network
 ```bash
 sudo ./make-ran-er.sh
 ```
@@ -76,6 +46,7 @@ $ sudo systemctl restart open5gs-webui
 Refer to ``srsRAN-5G-ER`` for documentation of the ``rt-agent`` 
 #### Running in over the air mode 
 Make sure you have UHD installed 
+
 ```bash
 sudo ./run_gnb_ota.sh
 ```
