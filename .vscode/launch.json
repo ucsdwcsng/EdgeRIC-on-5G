@@ -1,0 +1,56 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gnb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/srsRAN-5G-ER/build/apps/gnb/gnb",
+            "args": ["-c", "${workspaceRoot}/srsRAN-5G-ER/configs/zmq-mode-multi-ue.yml"],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gnb) Attach",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "${workspaceRoot}/srsRAN-5G-ER/build/apps/gnb/gnb",
+            "args": ["-c", "${workspaceRoot}/srsRAN-5G-ER/configs/zmq-mode-multi-ue.yml"],
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "processId": "${command:pickProcess}", // This allows you to select the process to attach to
+            "cwd": "${workspaceRoot}", // This sets the working directory
+            "externalConsole": false // Set to true if you need an external console
+        }
+
+    ]
+}

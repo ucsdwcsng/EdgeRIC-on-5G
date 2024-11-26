@@ -1,0 +1,108 @@
+defaults:
+  - _self_
+
+exp:
+  name: "unnamed"
+
+gpu_index: 0
+tau: 0.95
+log_std: -0.0
+l2_reg: 0.001
+learning_rate: 0.01 #PPO
+lr: 0.01 # Neurwin the result is with 0.1
+nn_size: 6 #Neurwin and PPO the result is with 4
+clip_epsilon: 0.2
+num_threads: 1
+train_log_interval: 1 #PPO
+save_model_interval: 1 # PPO; 0 = Don't save
+save_interval: 50 #NeurWIN
+
+gamma: 0.99 #0.9 # Neurwin and PPO 
+sigmoidParam: 5 #NeurWIN the result is with 20
+num_episodes: 5000 #20000 #Neurwin
+num_iters: 2000 #PPO -  Number of iterations to train for: The result is with 200
+batch_size: 5 #Neurwin #the result is with 50
+min_batch_size: 5000 #PPO ( x*horizon length to match NeurWIN)
+eval_batch_size: 3000 #PPO
+training_seed: 42
+
+
+# pretrained_path: #"outputs/2023-01-31/random_walk/learned_models/EdgeRIC_ppo.p"
+
+
+algorithm: "NeurWIN-PPO"
+num_seeds: 1 # Number of seeded trains; set to 0 for only evaluation
+
+num_eval_episodes: 3 # Number of evaluation episodes to test for (to compare against baseline agents)
+pretrained_path: #PPO 
+env: "EdgeRIC"
+render: False
+
+env_config:
+  normalize_state_space: True
+  action_space_type: "binary" # | "discrete" | "continuous"
+  cost_high_action: 0.0
+  binary_high_RBGs: 6
+  binary_low_RBGs: 2
+  augment_state_space: False # Add backpressure to state space
+  delay_state: 0
+  delay_action: 0
+  seed: 1 #42 #-1 # No seed
+  T: 1000
+  num_RBGs: 17 # Modify according to MHz of operation
+  num_UEs: 1
+  backlog_population: #Currently uniform arrival TODO Poisson? 
+    - [1, 50] # TTIs between chunk arrivals ,chunk_size(bytes) - UE1
+    # - [10, 1276.959999] # TTIs between chunk arrivals ,chunk_size(bytes) - UE2
+    # - [10, 9534.9] # TTIs between chunk arrivals ,chunk_size(bytes) - UE3
+    # - [10, 15850.5] # TTIs between chunk arrivals ,chunk_size(bytes) - UE4
+
+  cqi_traces: 
+    - "stream_rl/envs/cqi_traces/data_rand_walk.csv" # Train Trace for UE1
+    #  - "stream_rl/envs/cqi_traces/data_const_cqi.csv" # Train Trace for UE1
+    # - "stream_rl/envs/cqi_traces/data_rand_walk.csv" # Train trace for UE2
+  cqi_trace_eval: 
+    - "stream_rl/envs/cqi_traces/data_rand_walk.csv" # Eval Trace for UE1
+    # - "stream_rl/envs/cqi_traces/data_const_cqi.csv" # Eval Trace for UE1
+    # - "stream_rl/envs/cqi_traces/data_rand_walk.csv" # Eval Trace for UE2
+  reward: "throughput"
+  base_station:
+    max_len: 300 # Bytes
+  cqi_map: {    # [Mean throughput, Std] (Mbps)
+            1 : [0.008, 0.0],
+            2 : [0.016, 0.0],
+            3 : [0.024, 0.0],
+            4 : [0.032, 0.0],
+            5 : [0.040, 0.0],
+            6 : [0.048, 0.0],
+            7 : [0.056, 0.0],
+            8 : [0.064, 0.0],
+            9 : [0.072, 0.0],
+            10 : [0.080, 0.0],
+            11 : [0.088, 0.0],
+            12 : [0.096, 0.0],
+            13 : [0.104, 0.0],
+            14 : [0.112, 0.0],
+            15 : [0.120, 0.0],
+            }
+  # cqi_map: {    # [Mean throughput, Std] (Mbps)
+  #           1 : [0.4432, 0.2206],
+  #           2 : [0.6394, 0.2047],
+  #           3 : [0.6990, 0.3575],
+  #           4 : [0.9112, 0.2882],
+  #           5 : [1.0014, 0.4647],
+  #           6 : [1.3261, 0.3873],
+  #           7 : [1.5028, 0.5879],
+  #           #8 : [1.9077, 0.3314],
+  #           8 : [1.9077, 0.0],
+  #           9 : [2.0347, 0.3120],
+  #           10 : [2.0542, 0.3142],
+  #           11 : [2.0479, 0.3019],
+  #           12 : [2.0517, 0.3086],
+  #           13 : [2.0303, 0.3170],
+  #           14 : [2.0239, 0.3053],
+  #           15 : [2.0477, 0.2942],
+  #           }
+    
+    
+  

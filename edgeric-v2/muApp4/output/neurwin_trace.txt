@@ -1,0 +1,13 @@
+neurwin
+neurwin
+neurwin
+neurwin
+neurwin
+neurwin
+avg throughput: {0: 94418.35, 1: 73110.875, 2: 95924.775, 3: 93197.425}
+avg Violation_TPT: {'UE0': -91716.71410000011, 'UE1': -72306.134, 'UE2': -92069.03100000024, 'UE3': -93197.425}
+avg Violation_TSLS: {'UE0': -9.93492, 'UE1': 1149.42312, 'UE2': 1881.17172, 'UE3': 2497.5002}
+
+neurwin
+neurwin
+neurwin

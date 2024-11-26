@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+message UeMetrics {
+    uint32 rnti = 1;
+    uint32 cqi = 2;
+    float snr = 3;
+    float tx_bytes = 4;
+    float rx_bytes = 5;
+    uint32 dl_buffer = 6;
+    uint32 ul_buffer = 7;
+    float dl_tbs = 8;
+}
+
+message Metrics {
+    uint32 tti_cnt = 1;
+    repeated UeMetrics ue_metrics = 2;
+}

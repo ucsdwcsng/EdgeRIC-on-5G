@@ -1,0 +1,102 @@
+exp:
+  name: unnamed
+costfactor: 0.99
+gpu_index: 0
+tau: 0.95
+log_std: -0.0
+l2_reg: 0.001
+learning_rate: 0.05
+lr: 0.05
+nn_size: 6
+clip_epsilon: 0.2
+num_threads: 1
+train_log_interval: 1
+save_model_interval: 1
+save_interval: 50
+gamma: 0.9
+sigmoidParam: 5
+num_episodes: 50
+num_iters: 50
+batch_size: 20
+min_batch_size: 5000
+eval_batch_size: 3000
+training_seed: 42
+algorithm: NeurWIN-PPO
+num_seeds: 1
+num_eval_episodes: 5
+pretrained_path: null
+env: EdgeRIC
+render: false
+mu_r: 5
+mu_l: 15
+env_config:
+  normalize_state_space: true
+  action_space_type: binary
+  cost_high_action: 0.0
+  binary_high_RBGs: 9
+  binary_low_RBGs: 3
+  binary_zero_RBGs: 0
+  app: embb
+  augment_state_space: false
+  delay_state: 0
+  delay_action: 0
+  seed: 42
+  T: 5000
+  num_RBGs: 33
+  num_UEs: 1
+  backlog_population:
+  - - 10
+    - 6250
+  cqi_traces:
+  - /home/wcsng-24/gitrepos/EdgeRIC_indexing/EdgeRIC_rl_emulator/stream_rl/envs/cqi_traces/data_rand_walk.csv
+  cqi_trace_eval:
+  - stream_rl/envs/cqi_traces/data_rand_walk.csv
+  reward: throughput
+  base_station:
+    max_len: 300000
+  cqi_map:
+    1:
+    - 0.4432
+    - 0.2206
+    2:
+    - 0.6394
+    - 0.2047
+    3:
+    - 0.699
+    - 0.3575
+    4:
+    - 0.9112
+    - 0.2882
+    5:
+    - 1.0014
+    - 0.4647
+    6:
+    - 1.3261
+    - 0.3873
+    7:
+    - 1.5028
+    - 0.5879
+    8:
+    - 1.9077
+    - 0.3314
+    9:
+    - 2.0347
+    - 0.312
+    10:
+    - 2.0542
+    - 0.3142
+    11:
+    - 2.0479
+    - 0.3019
+    12:
+    - 2.0517
+    - 0.3086
+    13:
+    - 2.0303
+    - 0.317
+    14:
+    - 2.0239
+    - 0.3053
+    15:
+    - 2.0477
+    - 0.2942
