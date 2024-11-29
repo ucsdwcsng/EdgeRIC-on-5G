@@ -1,3 +1,6 @@
 srsRAN-5G-ER/build
 srs-4G-UE/build
 edgeric-v2/muApp2/outputs
+docker/radio_network/srsRAN-5G-ER/build
+docker/radio_network/rs-4G-UE/build
+docker/radio_network/edgeric-v2/muApp2/outputs

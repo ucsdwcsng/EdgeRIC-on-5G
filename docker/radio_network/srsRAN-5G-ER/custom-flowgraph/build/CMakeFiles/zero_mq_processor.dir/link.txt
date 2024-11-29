@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/zero_mq_processor.dir/zero_mq_processor.cpp.o CMakeFiles/zero_mq_processor.dir/req_source.cpp.o CMakeFiles/zero_mq_processor.dir/rep_sink.cpp.o -o zero_mq_processor  -lzmq -lpthread 

@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../lib/include/srsran/srslog/context.h
+srsran/srslog/detail/support/tmp_utils.h
+../lib/include/srsran/srslog/srsran/srslog/detail/support/tmp_utils.h
+cassert
+-
+string
+-
+
+../lib/include/srsran/srslog/detail/support/tmp_utils.h
+cstddef
+-
+tuple
+-
+
+/home/EdgeRIC-A-real-time-RIC/srs-4G-UE/lib/test/srslog/context_test.cpp
+srsran/srslog/context.h
+/home/EdgeRIC-A-real-time-RIC/srs-4G-UE/lib/test/srslog/srsran/srslog/context.h
+testing_helpers.h
+/home/EdgeRIC-A-real-time-RIC/srs-4G-UE/lib/test/srslog/testing_helpers.h
+vector
+-
+
+/home/EdgeRIC-A-real-time-RIC/srs-4G-UE/lib/test/srslog/testing_helpers.h
+cstdio
+-
+

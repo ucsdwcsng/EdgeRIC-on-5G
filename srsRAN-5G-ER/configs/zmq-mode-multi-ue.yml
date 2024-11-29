@@ -4,9 +4,14 @@
 #   sudo ./gnb -c gnb_zmq.yaml
 
 amf:
-  addr: 127.0.0.100                  # The address or hostname of the AMF.
-  bind_addr: 127.0.0.1               # A local IP that the gNB binds to for traffic from the AMF.
-
+  addr: 10.53.1.2 #127.0.0.100                  # The address or hostname of the AMF.
+  port: 38412
+  bind_addr: 10.53.1.1 #127.0.0.1               # A local IP that the gNB binds to for traffic from the AMF.
+  # supported_tracking_areas:
+  #   - tac: 7
+  #     plmn_list:
+        # - plmn: "00101"
+          
 ru_sdr:
   device_driver: zmq                # The RF driver name.
   device_args: tx_port=tcp://127.0.0.1:2101,rx_port=tcp://127.0.0.1:2100,base_srate=11.52 ##### Ushasi: For 20Mhz - use 23.04e6 # Optionally pass arguments to the selected RF driver.

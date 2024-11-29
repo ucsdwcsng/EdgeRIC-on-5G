@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../lib/include/srsran/config.h
+
+../lib/include/srsran/phy/utils/bit.h
+stdint.h
+-
+stdio.h
+-
+srsran/config.h
+../lib/include/srsran/phy/utils/srsran/config.h
+
+../lib/include/srsran/phy/utils/random.h
+srsran/config.h
+../lib/include/srsran/phy/utils/srsran/config.h
+inttypes.h
+-
+stdbool.h
+-
+
+/home/EdgeRIC-A-real-time-RIC/srs-4G-UE/lib/src/phy/utils/random.cpp
+srsran/phy/utils/random.h
+/home/EdgeRIC-A-real-time-RIC/srs-4G-UE/lib/src/phy/utils/srsran/phy/utils/random.h
+srsran/phy/utils/bit.h
+/home/EdgeRIC-A-real-time-RIC/srs-4G-UE/lib/src/phy/utils/srsran/phy/utils/bit.h
+complex
+-
+random
+-
+

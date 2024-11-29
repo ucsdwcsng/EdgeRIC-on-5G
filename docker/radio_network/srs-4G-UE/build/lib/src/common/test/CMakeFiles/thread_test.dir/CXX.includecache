@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../lib/include/srsran/common/threads.h
+pthread.h
+-
+stdint.h
+-
+stdio.h
+-
+sys/timerfd.h
+-
+unistd.h
+-
+atomic
+-
+string
+-
+
+/home/EdgeRIC-A-real-time-RIC/srs-4G-UE/lib/src/common/test/thread_test.cc
+iostream
+-
+srsran/common/threads.h
+-
+

@@ -1,0 +1,62 @@
+amf:
+  addr: 10.53.1.2 #127.0.0.100\                                             # The address or hostname of the AMF.
+  # addr: 169.254.34.4                                             # The address or hostname of the AMF.
+  bind_addr: 10.53.1.3 #127.0.0.1  
+                                          # A local IP that the gNB binds to for traffic from the AMF.
+ru_sdr:
+  device_driver: uhd                  # The RF driver name.
+  device_args: type=n3xx, master_clock_rate = 245.76e6              # Optionally pass arguments to the selected RF driver.
+  clock:                         # Specify the clock source used by the RF.
+  sync:                          # Specify the sync source used by the RF.
+  srate: 61.44                        # RF sample rate might need to be adjusted according to selected bandwidth.
+  # srate: 61.44                        # RF sample rate might need to be adjusted according to selected bandwidth.
+  # srate: 122.88                        # RF sample rate might need to be adjusted according to selected bandwidth.
+  tx_gain: 40 #55                         # Transmit gain of the RF might need to adjusted to the given situation.
+  rx_gain: 40 #60                         # Receive gain of the RF might need to adjusted to the given situation.
+cell_cfg:
+  dl_arfcn: 536020 #627340                                              # ARFCN of the downlink carrier (center frequency).
+  band: 7 #78                                                      # The NR band.
+  channel_bandwidth_MHz: 20                                     # Bandwith in MHz. Number of PRBs will be automatically derived.
+  common_scs: 15 #30                                                # Subcarrier spacing in kHz used for data.
+  plmn: "00101"                                                 # PLMN broadcasted by the gNB.
+  tac: 7                                                        # Tracking area code (needs to match the core configuration).
+  pci: 1 
+  # pdcch:
+  #   common:
+  #     ss0_index: 0                  # Set search space zero index to match srsUE capabilities
+  #     coreset0_index: 12            # Set search CORESET Zero index to match srsUE capabilities
+  #   dedicated:
+  #     ss2_type: common              # Search Space type, has to be set to common
+  #     dci_format_0_1_and_1_1: false # Set correct DCI format (fallback)
+  # prach:
+  #   prach_config_index: 1           # Sets PRACH config to match what is expected by srsUE
+  sched_expert_cfg:
+    policy_sched_cfg:
+      pf_sched:
+        pf_sched_fairness_coeff: 1.5
+  csi:
+    csi_rs_enabled: true
+    csi_rs_period: 20                                                       # Physical cell ID.
+log:
+  filename: /tmp/gnb.log                                        # Path of the log file.
+  all_level: warning
+cu_cp:
+  inactivity_timer: 7200 #600 #7200                                               # Logging level applied to all layers.
+pcap:
+  mac_enable: false                                             # Set to true to enable MAC-layer PCAPs.
+  mac_filename: /tmp/gnb_mac.pcap                               # Path where the MAC PCAP is stored.
+  ngap_enable: false                                            # Set to true to enable NGAP PCAPs.
+  ngap_filename: /tmp/gnb_ngap.pcap                             # Path where the NGAP PCAP is stored.# IMSI: 001010123456789
+# # Key: 41B7157E3337F0ADD8DA89210D89E17F
+# # OPC: 1CD638FC96E02EBD35AA0D41EB6F812F
+
+# pcap:
+#   rlc_enable: true
+#   rlc_filename: /home/wcsng-23/gitrepos/Ushasi-ER-5G/srsRAN-5G-ER/pcaps/gnb_rlc.pcap
+#   rlc_rb_type: all
+#   mac_enable: true                                             # Set to true to enable MAC-layer PCAP>
+#   mac_filename: /home/wcsng-23/gitrepos/Ushasi-ER-5G/srsRAN-5G-ER/pcaps/gnb_mac.pcap                                 # Path where the MAC PCAP is stored.
+#   ngap_enable: true                                            # Set to true to enable NGAP PCAPs.
+#   ngap_filename: /home/wcsng-23/gitrepos/Ushasi-ER-5G/srsRAN-5G-ER/pcaps/gnb_ngap.pcap                               # Path where the NGAP PCAP is stored.
+#   # gtpu_enable: true
+#   # gtpu_filename: ../pcaps/gnb_gtpu.pcap  
