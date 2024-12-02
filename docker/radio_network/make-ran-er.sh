@@ -6,9 +6,9 @@ cd build
 cmake ../ -DENABLE_EXPORT=ON -DENABLE_ZEROMQ=ON
 make -j `nproc`
 
-# cd ../../srs-4G-UE
-# rm -rf build
-# mkdir build
-# cd build
-# cmake ../
-# make -j `nproc`
+cd ../../srs-4G-UE
+rm -rf build
+mkdir build
+cd build
+cmake ../
+make -j `nproc`
