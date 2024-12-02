@@ -25,7 +25,7 @@ std::map<uint16_t, uint8_t> edgeric::mcs_recved = {};
 //     {17922, 15}   // Example: RNTI 1002 with an MCS value of 18
 // };
 
-bool edgeric::enable_logging = true; // Initialize logging flag to false
+bool edgeric::enable_logging = false; // Initialize logging flag to false
 bool edgeric::initialized = false;
 
 zmq::context_t context;
