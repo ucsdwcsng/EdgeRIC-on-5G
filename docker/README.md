@@ -1,154 +1,130 @@
-# srsRAN Project Multi-Container Solution
+# Multi-Container Solution
 
-This folder contains a multi-container application, composed of:
+This folder contains a multi-container application (development mode), composed of:
 
-- srsRAN gnb: it will build and launch the gnb.
+- srsRAN gnb: it will build and run the srsRAN network, gnb and UEs.
 - Open5g core: an open source core to use with srsRAN gnb.
-- Grafana (+ InfluxDB + srsRAN metrics server): a UI solution to monitor metrics from srsRAN gnb.
+- EdgeRIC - the realtime RAN controller.
 
-To launch the full multi-container solution, please run:
-
+## Start the containers 
+ 
+**Terminal 1: Launch the open5gs Core Network** 
 ```bash
-docker compose -f docker/docker-compose.yml up
+docker-compose up --build 5gc
 ```
 
-or
-
+**Terminal 2: Start the Radio Access Network container** 
 ```bash
-cd docker/
-docker compose up
+docker-compose up gnb
 ```
-
-- To force a new build of the containers (including a new build of srsRAN gnb), please add a `--build` flag at the end of the previous command.
-- To run it in background, please add a `-d` flag at the end of the previous command.
-- For more options, check `docker compose up --help`
-
-To see services' output, you can run:
-
+**Terminal 3: Start the EdgeRIC container** 
 ```bash
-docker compose logs [OPTIONS] [SERVICE...]
+docker-compose up edgeric
 ```
+# Run the network
+The following steps will guide you to run a 2UE network in the virtual radio mode   
 
-- For more options, check `docker compose logs --help`
+You need to run the following from inside the srsRAN gnb container
 
-To stop it:
-
+**Terminal 3: Build srsRAN**
 ```bash
-docker compose -f docker/docker-compose.yml down
+docker exec -it srsran_gnb bash
+./make_ran_er.sh
 ```
-
-- If you also want to remove all internal data except the setup, you can add `--volumes` flag at the end of the previous command.
-- For more options, check `docker compose down --help`
-
-If you're not familiarized with `docker compose` tool, it will be recommended to check its [website](https://docs.docker.com/compose/) and `docker compose --help` output.
-
-## Enabling metrics reporting in the gnb
-
-To be able to see gnb's metric in the UI solution (grafana + influxdb + metrics-server) it's required to enable metrics reporting in the gnb config.
-For example:
-
-```yml
-metrics:
-  enable_json_metrics: true
-  addr: 172.19.1.4  # Metrics-server IP
-  port: 55555       # Metrics-server Port
-```
-
-## Run some services
-
-Instead of running all services provided, a partial run is allowed by doing:
-
+Once built, Start the GNU radio flowgraph in the same terminal
 ```bash
-docker compose -f docker/docker-compose.yml up <service_to_run>
+python3 2ue-zmq-mode-23.04Mhz-nogui.py # for 2ues, to run 4ues - run python3 4ue-zmq-mode-23.04Mhz-nogui.py
 ```
 
-Main options are:
-
-- `gnb`: It will start the srsRAN Project gNB + Open5G core, without UI stack.
-- `grafana`: It will start the full Grafana + InfluxDB + metrics-server stack, without srsRAN Project gnb and Open5g services.
-
-However, any service declared in the docker-compose.yml can be started standalone, like `5gc` or `influxdb`.
-
-## Customizations
-
-- Default docker compose uses `configs/gnb_rf_b200_tdd_n78_20mhz.yml` config file. You can change it by setting the variable `${GNB_CONFIG_PATH}` in the shell, in the `docker compose up` command line or using the existing env-file `.env`. More info about how to do it in docker documentation here: <https://docs.docker.com/compose/environment-variables/set-environment-variables/>
-
-- Network: If you are using an existing core-network on same machine, then you can comment the `5gc` service section and also link your srsran container to some existing AMF N2/N3 subnet, doing something like this:
-
-```yml
-  gnb: ...
-    networks:
-      network1:
-          ipv4_address: 192.168.70.163 # Setting a fixed IP in the "network1" net
-
-networks:
-  network1:
-    name: my-pre-existing-network
-    external: true
-```
-
-More info here: <https://docs.docker.com/compose/networking/>
-
-## Advanced Usage
-
-### Open5GS Container Parameters
-
-Advanced parameters for the Open5GS container are stored in [open5gs.env](open5gs/open5gs.env) file. You can modify it or use a totally different file by setting `OPEN_5GS_ENV_FILE` variable like in:
-
+**Terminal 4: Run the RAN**
 ```bash
-OPEN_5GS_ENV_FILE=/my/open5gs.env docker compose -f docker/docker-compose.yml up 5gc
+docker exec -it srsran_gnb bash
+./run_gnb_multi_ue.sh
 ```
+Press ``t`` to see the console trace  
 
-The following parameters can be set:
-
-- MONGODB_IP (default: 127.0.0.1): This is the IP of the mongodb to use. 127.0.0.1 is the mongodb that runs inside this container.
-- SUBSCRIBER_DB (default: "001010123456780,00112233445566778899aabbccddeeff,opc,63bfa50ee6523365ff14c1f45f88737d,8000,10.45.1.2"): This adds subscriber data for a single or multiple users to the Open5GS mongodb. It contains either:
-  - Comma separated string with information to define a subscriber
-  - `subscriber_db.csv`. This is a csv file that contains entries to add to open5gs mongodb. Each entry will represent a subscriber. It must be stored in `srsgnb/docker/open5gs/`
-- OPEN5GS_IP: This must be set to the IP of the container (here: 10.53.1.2).
-- UE_IP_BASE: Defines the IP base used for connected UEs (here: 10.45.0).
-- DEBUG (default: false): This can be set to true to run Open5GS in debug mode.
-
-For more info, please check it's own [README.md](open5gs/README.md).
-
-### Open5GS Container Applications
-
-Open5Gs container includes other binaries such as
-
-- 5gc: 5G Core Only
-- epc: EPC Only
-- app: Both 5G Core and EPC
-
-By default 5gc is launched. If you want to run another binary, remember you can use `docker compose run` to run any command inside the container. For example:
-
+**Terminal 5: Run the UEs**
 ```bash
-docker compose -f docker/docker-compose.yml run 5gc epc -c open5gs-5gc.yml
+docker exec -it srsran_gnb bash
+./run2ue-zmq-mode.sh # for 2ues, to run 4ues - run ./run4ue-zmq-mode.sh
 ```
+The ip addresses assigned to UEs will be 10.45.1.2/24, to run any traffic originating from ues, you need run it from their namespaces ``ip netns exec ue{i}``    
+The srsRAN gnb container starts up with 4 UE namespaces, to run more UEs, you need to add more, with command ``ip netns add``
 
-If you need to use custom configuration files, remember you can share folder and files between your local PC (host) and the container:
+# Run Traffic
 
+For downlink traffic, start the traffic server on the UEs:  
+**Terminal 6: start iperf server at the UEs**  
 ```bash
-docker compose -f docker/docker-compose.yml run -v /tmp/my-open5gs-5gc.yml:/config/my-open5gs-5gc.yml 5gc epc -c /config/my-open5gs-5gc.yml
+docker exec -it srsran_gnb bash
+cd traffic-generator
+./iperf_server_2ues.sh 
 ```
-
-### Metric UI Setup
-
-Change the environment variables define in `.env` that are used to setup and deploy the stack
-
+**Terminal 7: Start iperf client for UE1**  
+To run traffic from the open5gs CN container, you have to use ``docker exec -it open5gs_5gc``  
 ```bash
-├── .env         <---
-├── docker-compose.yml
-├── Dockerfile
-└── ...
+docker exec -it open5gs_5gc iperf -c 10.45.1.2 -u -i 1 -b 10M -t 1000
+```
+**Terminal 8: Start iperf client for UE2**  
+```bash
+docker exec -it open5gs_5gc iperf -c 10.45.1.3 -u -i 1 -b 10M -t 1000
 ```
 
-You can access grafana in <http://localhost:3300>. By default, you'll be in view mode without needing to log in. If you want to modify anything, you need to log in using following credentials:
+# Try out EdgeRIC muApps
+You need to run the following from inside the srsRAN gnb container ``docker exec -it edgeric_v2 bash``  
+## Run the scheduling muApp
+**Terminal 9: Set the scheduling algorithm**  
+```bash
+docker exec -it edgeric_v2 bash
+redis-cli set scheduling_algorithm "Max CQI" # Other options "Proportional Fair"
+                                             # "Max Weight", "Round Robin", "RL"
+```
+**Terminal 10: Start the muApp** 
+```bash
+docker exec -it edgeric_v2 bash
+cd muApp1
+python3 muApp1_run_DL_scheduling.py
+```
+### What to observe 
+Terminal 10 will show the algorithms selected and will print the total average system throughput observed
+```bash
+Algorithm index:  2  ,  Max Weight
+total system throughput: 8.781944 
 
-- username: `admin`
-- password: `admin`
+Algorithm index:  2  ,  Max Weight
+total system throughput: 8.063600000000001 
 
-After your fist log, it will ask you to change the password for a new one, but it can be skipped.
+Algorithm index:  2  ,  Max Weight
+total system throughput: 8.093352 
 
-Provisioned Dashboards are into `Home > Dashboards`. **They don't support variable substitution**, so if you change default values in `.env` file, you'll need to go to `grafana/dashboards/` and manually search and replace values such as influxdb uid or bucket in every `.json` file.
+Algorithm index:  2  ,  Max Weight
+total system throughput: 8.071168 
+```
+**Terminal 9** - To observe the throughput updates, update the scheduler with the following command 
+```bash
+redis-cli set scheduling_algorithm "RL" 
+```
 
-For more info about the metrics server, please check it's own [README.md](metrics_server/README.md).
+**Terminal 10** - Increased system throughput observed with our trained RL model
+```bash
+Algorithm index:  20  ,  RL
+Executing RL model at: ./rl_model/fully_trained_model
+total system throughput: 12.071200000000001 
+
+Algorithm index:  20  ,  RL
+Executing RL model at: ./rl_model/fully_trained_model
+total system throughput: 11.727624 
+
+Algorithm index:  20  ,  RL
+Executing RL model at: ./rl_model/fully_trained_model
+total system throughput: 11.714879999999999 
+
+Algorithm index:  20  ,  RL
+Executing RL model at: ./rl_model/fully_trained_model
+total system throughput: 11.710384 
+
+Algorithm index:  20  ,  RL
+Executing RL model at: ./rl_model/fully_trained_model
+total system throughput: 11.743776 
+```
+
