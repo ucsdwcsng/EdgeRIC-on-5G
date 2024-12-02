@@ -1919,6 +1919,32 @@ srsran_rf_utils/fast:
 .PHONY : srsran_rf_utils/fast
 
 #=============================================================================
+# Target rules for targets named srsran_rf_uhd
+
+# Build rule for target.
+srsran_rf_uhd: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 srsran_rf_uhd
+.PHONY : srsran_rf_uhd
+
+# fast build rule for target.
+srsran_rf_uhd/fast:
+	$(MAKE) -f lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir/build.make lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir/build
+.PHONY : srsran_rf_uhd/fast
+
+#=============================================================================
+# Target rules for targets named srsran_rf_zmq
+
+# Build rule for target.
+srsran_rf_zmq: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 srsran_rf_zmq
+.PHONY : srsran_rf_zmq
+
+# fast build rule for target.
+srsran_rf_zmq/fast:
+	$(MAKE) -f lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/build.make lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/build
+.PHONY : srsran_rf_zmq/fast
+
+#=============================================================================
 # Target rules for targets named srsran_rf_object
 
 # Build rule for target.
@@ -1969,19 +1995,6 @@ rf_file_test: cmake_check_build_system
 rf_file_test/fast:
 	$(MAKE) -f lib/src/phy/rf/CMakeFiles/rf_file_test.dir/build.make lib/src/phy/rf/CMakeFiles/rf_file_test.dir/build
 .PHONY : rf_file_test/fast
-
-#=============================================================================
-# Target rules for targets named srsran_rf_zmq
-
-# Build rule for target.
-srsran_rf_zmq: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 srsran_rf_zmq
-.PHONY : srsran_rf_zmq
-
-# fast build rule for target.
-srsran_rf_zmq/fast:
-	$(MAKE) -f lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/build.make lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/build
-.PHONY : srsran_rf_zmq/fast
 
 #=============================================================================
 # Target rules for targets named srsran_sync
@@ -5381,11 +5394,12 @@ help:
 	@echo "... npdcch_test"
 	@echo "... prach_test_multi"
 	@echo "... srsran_rf_utils"
+	@echo "... srsran_rf_uhd"
+	@echo "... srsran_rf_zmq"
 	@echo "... srsran_rf_object"
 	@echo "... srsran_rf"
 	@echo "... rf_zmq_test"
 	@echo "... rf_file_test"
-	@echo "... srsran_rf_zmq"
 	@echo "... srsran_sync"
 	@echo "... pss_file"
 	@echo "... sync_nbiot_test"

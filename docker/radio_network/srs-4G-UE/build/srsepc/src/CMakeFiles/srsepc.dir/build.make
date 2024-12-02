@@ -89,6 +89,7 @@ srsepc/src/srsepc: lib/src/common/libsrsran_common.a
 srsepc/src/srsepc: lib/src/srslog/libsrslog.a
 srsepc/src/srsepc: lib/src/support/libsupport.a
 srsepc/src/srsepc: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+srsepc/src/srsepc: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 srsepc/src/srsepc: /usr/lib/x86_64-linux-gnu/libmbedcrypto.so
 srsepc/src/srsepc: /usr/lib/x86_64-linux-gnu/libconfig++.so
 srsepc/src/srsepc: /usr/lib/x86_64-linux-gnu/libsctp.so

@@ -27,7 +27,7 @@
 # NUM_CORES             Number or empty for all
 # EXTRA_CMAKE_ARGS      Extra flags for srsRAN Project
 
-# ARG OS_VERSION=22.04
+# ARG OS_VERSION=20.04
 # ARG LIB=uhd
 # ARG LIB_VERSION=4.6.0.0
 # ARG ARCH=native
@@ -99,6 +99,7 @@
 ######################################################################################
 
 FROM ubuntu:20.04
+# FROM srsran/gnb
 #FROM uhd:latest
 
 
@@ -147,7 +148,32 @@ RUN pip3 install protobuf==3.20.*
 RUN apt-get update 
 RUN apt-get install -y cmake 
 RUN cmake --version
-	
+
+ARG UHD_VERSION="v4.6.0.0"
+
+# Clone UHD source code
+WORKDIR /usr/local/src
+RUN git clone --branch ${UHD_VERSION} --recursive https://github.com/EttusResearch/uhd.git uhd
+
+# Build and install UHD
+WORKDIR /usr/local/src/uhd/host
+RUN mkdir build && cd build && \
+    cmake ../ \
+        -DENABLE_MANUAL=OFF \
+        -DENABLE_DOXYGEN=OFF \
+        -DENABLE_TESTS=OFF \
+        -DCMAKE_BUILD_TYPE=Release && \
+    make -j$(nproc) && \
+    make install && \
+    ldconfig
+
+# Download UHD images
+RUN /usr/local/bin/uhd_images_downloader
+
+# Set environment variables for UHD
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+ENV PATH=$PATH:/usr/local/bin
+
 
 
 ## copy srsran and Pytorch
@@ -158,8 +184,8 @@ COPY . .
 ## copying zmq header files 
 #RUN cp zmq.h /usr/local/include
 #RUN cp zmq.hpp /usr/local/include
-COPY setup_netns.sh /usr/local/bin/setup_netns.sh
-RUN chmod +x /usr/local/bin/setup_netns.sh
+COPY setup_netns.sh /opt/EdgeRIC/setup_netns.sh
+RUN chmod +x /opt/EdgeRIC/setup_netns.sh
 
 ## Compile srsran for enb/epc
 RUN apt-get install -y libprotobuf-dev protobuf-compiler
@@ -174,7 +200,8 @@ RUN apt-get install -y libprotobuf-dev protobuf-compiler
 # WORKDIR "/home/EdgeRIC-A-real-time-RIC/srs-4G-UE"
 # RUN rm -rf build && mkdir build && cd build && cmake ../ && make -j$(nproc)
 
-WORKDIR "/home/EdgeRIC-A-real-time-RIC"
+WORKDIR /home/EdgeRIC-A-real-time-RIC
+CMD [ "/opt/EdgeRIC/setup_netns.sh" ] 
 
 
 

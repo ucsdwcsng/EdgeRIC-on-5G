@@ -185,6 +185,7 @@ srsenb/src/srsenb: lib/src/asn1/librrc_nr_asn1.a
 srsenb/src/srsenb: lib/src/asn1/libngap_nr_asn1.a
 srsenb/src/srsenb: lib/src/asn1/libric_e2.a
 srsenb/src/srsenb: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+srsenb/src/srsenb: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 srsenb/src/srsenb: /usr/lib/x86_64-linux-gnu/libmbedcrypto.so
 srsenb/src/srsenb: /usr/lib/x86_64-linux-gnu/libconfig++.so
 srsenb/src/srsenb: /usr/lib/x86_64-linux-gnu/libsctp.so

@@ -85,6 +85,7 @@ srsenb/test/mac/sched_grid_test: lib/src/common/libsrsran_common.a
 srsenb/test/mac/sched_grid_test: lib/src/mac/libsrsran_mac.a
 srsenb/test/mac/sched_grid_test: srsenb/test/mac/libsched_test_common.a
 srsenb/test/mac/sched_grid_test: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+srsenb/test/mac/sched_grid_test: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 srsenb/test/mac/sched_grid_test: srsenb/src/stack/mac/libsrsenb_mac.a
 srsenb/test/mac/sched_grid_test: srsenb/src/stack/mac/common/libsrsenb_mac_common.a
 srsenb/test/mac/sched_grid_test: lib/src/mac/libsrsran_mac.a

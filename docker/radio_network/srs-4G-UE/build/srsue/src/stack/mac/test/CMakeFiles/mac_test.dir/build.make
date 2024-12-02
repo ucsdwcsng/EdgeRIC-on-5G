@@ -88,6 +88,7 @@ srsue/src/stack/mac/test/mac_test: lib/src/radio/libsrsran_radio.a
 srsue/src/stack/mac/test/mac_test: lib/src/asn1/libsrsran_asn1.a
 srsue/src/stack/mac/test/mac_test: lib/src/asn1/librrc_asn1.a
 srsue/src/stack/mac/test/mac_test: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+srsue/src/stack/mac/test/mac_test: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 srsue/src/stack/mac/test/mac_test: srsue/src/stack/mac_common/libsrsue_mac_common.a
 srsue/src/stack/mac/test/mac_test: lib/src/phy/rf/libsrsran_rf.so.23.04.0
 srsue/src/stack/mac/test/mac_test: lib/src/phy/rf/libsrsran_rf_utils.a

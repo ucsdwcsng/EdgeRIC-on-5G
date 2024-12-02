@@ -5,7 +5,7 @@ amf:
                                           # A local IP that the gNB binds to for traffic from the AMF.
 ru_sdr:
   device_driver: uhd                  # The RF driver name.
-  device_args: type=n3xx, master_clock_rate = 245.76e6              # Optionally pass arguments to the selected RF driver.
+  device_args: ip_addr=192.168.101.15, master_clock_rate = 245.76e6             # Optionally pass arguments to the selected RF driver.
   clock:                         # Specify the clock source used by the RF.
   sync:                          # Specify the sync source used by the RF.
   srate: 61.44                        # RF sample rate might need to be adjusted according to selected bandwidth.

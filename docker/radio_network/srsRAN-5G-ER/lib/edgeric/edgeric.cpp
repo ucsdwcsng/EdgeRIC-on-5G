@@ -25,7 +25,7 @@ std::map<uint16_t, uint8_t> edgeric::mcs_recved = {};
 //     {17922, 15}   // Example: RNTI 1002 with an MCS value of 18
 // };
 
-bool edgeric::enable_logging = false; // Initialize logging flag to false
+bool edgeric::enable_logging = true; // Initialize logging flag to false
 bool edgeric::initialized = false;
 
 zmq::context_t context;
@@ -34,11 +34,11 @@ zmq::socket_t subscriber_weights(context, ZMQ_SUB);
 zmq::socket_t subscriber_mcs(context, ZMQ_SUB);
 
 void edgeric::init() {
-    publisher.bind("ipc:///tmp/metrics");
-    //publisher.bind("tcp://172.10.10.1:5050");
+    // publisher.bind("ipc:///tmp/metrics");
+    publisher.bind("tcp://10.53.2.4:5050");
 
-    subscriber_weights.connect("ipc:///tmp/control_weights_actions");
-    //subscriber_weights.connect("tcp://172.10.10.2:5051");
+    // subscriber_weights.connect("ipc:///tmp/control_weights_actions");
+    subscriber_weights.connect("tcp://10.53.2.5:5051");
     zmq_setsockopt(subscriber_weights, ZMQ_SUBSCRIBE, "", 0);
     // subscriber_weights.setsockopt(ZMQ_SUBSCRIBE, "", 0);
     int conflate = 1;
@@ -46,8 +46,8 @@ void edgeric::init() {
     // zmq_setsockopt(subscriber_weights, ZMQ_CONFLATE, &conflate, sizeof(conflate));
 
 
-    subscriber_mcs.connect("ipc:///tmp/control_mcs_actions");
-    //subscriber_mcs.connect("tcp://172.10.10.2:5050");
+    // subscriber_mcs.connect("ipc:///tmp/control_mcs_actions");
+    subscriber_mcs.connect("tcp://10.53.2.5:5052");
     subscriber_mcs.setsockopt(ZMQ_SUBSCRIBE, "", 0);
     // int conflate = 1;
     subscriber_mcs.setsockopt(ZMQ_CONFLATE, &conflate, sizeof(conflate));

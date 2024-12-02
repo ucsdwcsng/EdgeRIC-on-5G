@@ -85,6 +85,7 @@ srsepc/src/srsmbms: lib/src/gtpu/libsrsran_gtpu.a
 srsepc/src/srsmbms: lib/src/common/libsrsran_common.a
 srsepc/src/srsmbms: lib/src/srslog/libsrslog.a
 srsepc/src/srsmbms: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+srsepc/src/srsmbms: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 srsepc/src/srsmbms: /usr/lib/x86_64-linux-gnu/libmbedcrypto.so
 srsepc/src/srsmbms: /usr/lib/x86_64-linux-gnu/libconfig++.so
 srsepc/src/srsmbms: /usr/lib/x86_64-linux-gnu/libsctp.so

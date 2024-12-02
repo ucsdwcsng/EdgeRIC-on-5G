@@ -300,6 +300,12 @@ alloc_result ue_cell_grid_allocator::allocate_dl_grant(const ue_pdsch_grant& gra
           float weights_recvd = opt_weights_recvd.value();
           // mcs_prbs.n_prbs = weights_recvd *  bwp_dl_cmn.generic_params.crbs.length(); 
           mcs_prbs.n_prbs = weights_recvd * this_tti_unused_crbs;
+          // std::ofstream logfile2("scheduling-final.txt", std::ios_base::app); // Open log file in append mode
+          // if (logfile2.is_open()) {
+          //     logfile2 << "Calculating PRBs from weights " << static_cast<unsigned int>(mcs_prbs.n_prbs);
+          //     logfile2 << std::endl;
+          //     logfile2.close();
+          // }
           mcs_prbs.n_prbs = std::min(mcs_prbs.n_prbs, static_cast<unsigned int>(calc_prbs));
           // Apply expert-configured limits.
           mcs_prbs.n_prbs = std::max(mcs_prbs.n_prbs, expert_cfg.pdsch_nof_rbs.start());
@@ -617,7 +623,7 @@ alloc_result ue_cell_grid_allocator::allocate_dl_grant(const ue_pdsch_grant& gra
         // logfile << ", UE Index: " << static_cast<unsigned int>(ue_cc->rnti());
         logfile << ", Weights Received: " << weights_to_log; 
         logfile << ", PRBs needed: " << static_cast<unsigned int>(calc_prbs);
-        logfile << ", Unused PRBs: " << unused_crbs; 
+        logfile << ", Unused PRBs for UE: " << unused_crbs; 
         logfile << ", This TTI unused: " << this_tti_unused_crbs;
         // logfile << ", Slot: " << slot_str;  // Log the slot information
         logfile << ", MCS: " << mcs_value;  // Log the MCS

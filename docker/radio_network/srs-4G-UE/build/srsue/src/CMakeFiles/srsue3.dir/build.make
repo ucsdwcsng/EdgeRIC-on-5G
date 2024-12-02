@@ -163,6 +163,7 @@ srsue/src/srsue3: lib/src/system/libsystem.a
 srsue/src/srsue3: lib/src/asn1/librrc_nr_asn1.a
 srsue/src/srsue3: lib/src/asn1/libngap_nr_asn1.a
 srsue/src/srsue3: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+srsue/src/srsue3: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 srsue/src/srsue3: lib/src/asn1/libnas_5g_msg.a
 srsue/src/srsue3: srsue/src/stack/mac_common/libsrsue_mac_common.a
 srsue/src/srsue3: lib/src/phy/rf/libsrsran_rf.so.23.04.0

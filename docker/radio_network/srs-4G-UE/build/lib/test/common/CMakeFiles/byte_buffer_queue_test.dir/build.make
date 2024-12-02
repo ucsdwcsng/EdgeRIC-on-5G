@@ -82,6 +82,7 @@ lib/test/common/byte_buffer_queue_test: lib/test/common/CMakeFiles/byte_buffer_q
 lib/test/common/byte_buffer_queue_test: lib/src/phy/libsrsran_phy.a
 lib/test/common/byte_buffer_queue_test: lib/src/common/libsrsran_common.a
 lib/test/common/byte_buffer_queue_test: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+lib/test/common/byte_buffer_queue_test: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 lib/test/common/byte_buffer_queue_test: lib/src/phy/libsrsran_phy.a
 lib/test/common/byte_buffer_queue_test: /usr/lib/x86_64-linux-gnu/libfftw3f.so
 lib/test/common/byte_buffer_queue_test: lib/src/support/libsupport.a

@@ -83,6 +83,7 @@ lib/src/radio/test/test_radio_rt_gain: lib/src/common/libsrsran_common.a
 lib/src/radio/test/test_radio_rt_gain: lib/src/phy/libsrsran_phy.a
 lib/src/radio/test/test_radio_rt_gain: lib/src/radio/libsrsran_radio.a
 lib/src/radio/test/test_radio_rt_gain: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+lib/src/radio/test/test_radio_rt_gain: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 lib/src/radio/test/test_radio_rt_gain: lib/src/common/libsrsran_common.a
 lib/src/radio/test/test_radio_rt_gain: lib/src/support/libsupport.a
 lib/src/radio/test/test_radio_rt_gain: lib/src/srslog/libsrslog.a

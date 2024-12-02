@@ -84,6 +84,7 @@ lib/test/rlc/rlc_stress_test: lib/src/mac/libsrsran_mac.a
 lib/test/rlc/rlc_stress_test: lib/src/phy/libsrsran_phy.a
 lib/test/rlc/rlc_stress_test: lib/src/common/libsrsran_common.a
 lib/test/rlc/rlc_stress_test: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+lib/test/rlc/rlc_stress_test: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 lib/test/rlc/rlc_stress_test: lib/src/phy/libsrsran_phy.a
 lib/test/rlc/rlc_stress_test: /usr/lib/x86_64-linux-gnu/libfftw3f.so
 lib/test/rlc/rlc_stress_test: lib/src/support/libsupport.a

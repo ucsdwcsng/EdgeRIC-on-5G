@@ -87,6 +87,7 @@ srsenb/test/mac/sched_test_rand: srsenb/test/mac/libsched_test_common.a
 srsenb/test/mac/sched_test_rand: lib/src/phy/libsrsran_phy.a
 srsenb/test/mac/sched_test_rand: lib/src/asn1/librrc_asn1.a
 srsenb/test/mac/sched_test_rand: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+srsenb/test/mac/sched_test_rand: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 srsenb/test/mac/sched_test_rand: srsenb/src/stack/mac/libsrsenb_mac.a
 srsenb/test/mac/sched_test_rand: srsenb/src/stack/mac/common/libsrsenb_mac_common.a
 srsenb/test/mac/sched_test_rand: lib/src/mac/libsrsran_mac.a

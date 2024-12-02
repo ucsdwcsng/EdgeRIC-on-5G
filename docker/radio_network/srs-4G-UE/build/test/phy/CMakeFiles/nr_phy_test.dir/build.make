@@ -88,7 +88,9 @@ test/phy/nr_phy_test: srsenb/src/phy/libsrsenb_phy.a
 test/phy/nr_phy_test: srsgnb/src/stack/mac/libsrsgnb_mac.a
 test/phy/nr_phy_test: lib/src/mac/libsrsran_mac.a
 test/phy/nr_phy_test: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+test/phy/nr_phy_test: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 test/phy/nr_phy_test: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+test/phy/nr_phy_test: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 test/phy/nr_phy_test: lib/src/phy/rf/libsrsran_rf.so.23.04.0
 test/phy/nr_phy_test: lib/src/phy/rf/libsrsran_rf_utils.a
 test/phy/nr_phy_test: lib/src/asn1/librrc_nr_asn1.a

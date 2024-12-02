@@ -92,6 +92,7 @@ srsgnb/src/stack/rrc/test/rrc_nr_core_test: lib/src/gtpu/libsrsran_gtpu.a
 srsgnb/src/stack/rrc/test/rrc_nr_core_test: srsenb/src/stack/upper/libsrsenb_upper.a
 srsgnb/src/stack/rrc/test/rrc_nr_core_test: /usr/lib/x86_64-linux-gnu/libsctp.so
 srsgnb/src/stack/rrc/test/rrc_nr_core_test: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+srsgnb/src/stack/rrc/test/rrc_nr_core_test: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 srsgnb/src/stack/rrc/test/rrc_nr_core_test: srsenb/src/stack/rrc/libsrsenb_rrc.a
 srsgnb/src/stack/rrc/test/rrc_nr_core_test: srsenb/src/common/libsrsenb_common.a
 srsgnb/src/stack/rrc/test/rrc_nr_core_test: lib/src/asn1/librrc_asn1.a

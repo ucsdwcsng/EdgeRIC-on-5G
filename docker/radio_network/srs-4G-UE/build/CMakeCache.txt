@@ -49,6 +49,8 @@ Boost_INCLUDE_DIR:PATH=/usr/include
 
 Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE:STRING=/usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
 
+Boost_SYSTEM_LIBRARY_RELEASE:STRING=/usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
+
 //Path to a program.
 CCACHE_EXECUTABLE:FILEPATH=CCACHE_EXECUTABLE-NOTFOUND
 
@@ -528,7 +530,7 @@ SCTP_INCLUDE_DIRS:PATH=/usr/include
 SCTP_LIBRARIES:FILEPATH=/usr/lib/x86_64-linux-gnu/libsctp.so
 
 //Name of the computer/site where compile is being run
-SITE:STRING=dd43ed3c7899
+SITE:STRING=8b5c45639612
 
 //Path to a file.
 SKIQ_INCLUDE_DIRS:PATH=SKIQ_INCLUDE_DIRS-NOTFOUND
@@ -600,10 +602,10 @@ STOP_ON_WARNING:BOOL=OFF
 SVNCOMMAND:FILEPATH=SVNCOMMAND-NOTFOUND
 
 //Path to a file.
-UHD_INCLUDE_DIRS:PATH=UHD_INCLUDE_DIRS-NOTFOUND
+UHD_INCLUDE_DIRS:PATH=/usr/local/include
 
 //Path to a library.
-UHD_LIBRARIES:FILEPATH=UHD_LIBRARIES-NOTFOUND
+UHD_LIBRARIES:FILEPATH=/usr/local/lib/libuhd.so
 
 //Use standard LTE sampling rates
 USE_LTE_RATES:BOOL=OFF
@@ -625,6 +627,9 @@ boost_headers_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.71.0
 
 //The directory containing a CMake configuration file for boost_program_options.
 boost_program_options_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_program_options-1.71.0
+
+//The directory containing a CMake configuration file for boost_system.
+boost_system_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_system-1.71.0
 
 //Dependencies for the target
 enb_cfg_parser_LIB_DEPENDS:STATIC=general;srsran_common;general;srsgnb_rrc_config_utils;general;/usr/lib/x86_64-linux-gnu/libconfig++.so;
@@ -697,6 +702,9 @@ srsran_radio_LIB_DEPENDS:STATIC=general;srsran_rf;general;srsran_common;
 
 //Dependencies for the target
 srsran_rf_LIB_DEPENDS:STATIC=general;dl;general;srsran_rf_utils;general;srsran_phy;
+
+//Dependencies for the target
+srsran_rf_uhd_LIB_DEPENDS:STATIC=general;srsran_rf_utils;general;srsran_phy;general;/usr/local/lib/libuhd.so;general;Boost::program_options;general;Boost::system;
 
 //Dependencies for the target
 srsran_rf_utils_LIB_DEPENDS:STATIC=general;srsran_phy;
@@ -996,7 +1004,7 @@ FFTW3F_STATIC_LIBRARY-ADVANCED:INTERNAL=1
 //Details about finding Backward
 FIND_PACKAGE_MESSAGE_DETAILS_Backward:INTERNAL=[/home/EdgeRIC-A-real-time-RIC/srs-4G-UE/cmake/modules][v()]
 //Details about finding Boost
-FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake][cfound components: program_options ][v1.71.0(1.35)]
+FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake][cfound components: program_options system ][v1.71.0(1.35)]
 //Details about finding FFTW3F
 FIND_PACKAGE_MESSAGE_DETAILS_FFTW3F:INTERNAL=[/usr/lib/x86_64-linux-gnu/libfftw3f.so][/usr/include][v()]
 //Details about finding MbedTLS
@@ -1007,6 +1015,8 @@ FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.29.1()]
 FIND_PACKAGE_MESSAGE_DETAILS_SCTP:INTERNAL=[/usr/lib/x86_64-linux-gnu/libsctp.so][/usr/include][v()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
+//Details about finding UHD
+FIND_PACKAGE_MESSAGE_DETAILS_UHD:INTERNAL=[/usr/local/lib/libuhd.so][/usr/local/include][v()]
 //ADVANCED property for variable: GITCOMMAND
 GITCOMMAND-ADVANCED:INTERNAL=1
 //Test HAVE_AVX
@@ -1295,6 +1305,12 @@ SRSGUI_INCLUDE_DIRS-ADVANCED:INTERNAL=1
 SRSGUI_LIBRARIES-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: SVNCOMMAND
 SVNCOMMAND-ADVANCED:INTERNAL=1
+//Test UHD_ENABLE_CUSTOM_RFNOC
+UHD_ENABLE_CUSTOM_RFNOC:INTERNAL=
+//Test UHD_ENABLE_RFNOC
+UHD_ENABLE_RFNOC:INTERNAL=
+//Test UHD_ENABLE_X300_FW_RESET
+UHD_ENABLE_X300_FW_RESET:INTERNAL=
 //ADVANCED property for variable: UHD_INCLUDE_DIRS
 UHD_INCLUDE_DIRS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: UHD_LIBRARIES
@@ -1345,6 +1361,8 @@ __pkg_config_checked_ZEROMQ_PKG:INTERNAL=1
 boost_headers_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_program_options_DIR
 boost_program_options_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: boost_system_DIR
+boost_system_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_PC_FFTW3F_fftw3f
 pkgcfg_lib_PC_FFTW3F_fftw3f-ADVANCED:INTERNAL=1
 prefix_result:INTERNAL=/usr/lib/x86_64-linux-gnu

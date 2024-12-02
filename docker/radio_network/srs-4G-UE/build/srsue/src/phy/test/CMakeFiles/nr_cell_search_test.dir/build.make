@@ -84,6 +84,7 @@ srsue/src/phy/test/nr_cell_search_test: lib/src/common/libsrsran_common.a
 srsue/src/phy/test/nr_cell_search_test: lib/src/phy/libsrsran_phy.a
 srsue/src/phy/test/nr_cell_search_test: lib/src/radio/libsrsran_radio.a
 srsue/src/phy/test/nr_cell_search_test: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+srsue/src/phy/test/nr_cell_search_test: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 srsue/src/phy/test/nr_cell_search_test: lib/src/common/libsrsran_common.a
 srsue/src/phy/test/nr_cell_search_test: lib/src/support/libsupport.a
 srsue/src/phy/test/nr_cell_search_test: lib/src/srslog/libsrslog.a

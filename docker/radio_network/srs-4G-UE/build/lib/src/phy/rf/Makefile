@@ -80,6 +80,18 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
@@ -100,18 +112,6 @@ list_install_components:
 list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
 
 # Special rule for the target package_source
 package_source:
@@ -205,6 +205,36 @@ srsran_rf_utils/fast:
 .PHONY : srsran_rf_utils/fast
 
 # Convenience name for target.
+lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir/rule:
+	cd /home/EdgeRIC-A-real-time-RIC/srs-4G-UE/build && $(MAKE) -f CMakeFiles/Makefile2 lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir/rule
+.PHONY : lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir/rule
+
+# Convenience name for target.
+srsran_rf_uhd: lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir/rule
+
+.PHONY : srsran_rf_uhd
+
+# fast build rule for target.
+srsran_rf_uhd/fast:
+	cd /home/EdgeRIC-A-real-time-RIC/srs-4G-UE/build && $(MAKE) -f lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir/build.make lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir/build
+.PHONY : srsran_rf_uhd/fast
+
+# Convenience name for target.
+lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/rule:
+	cd /home/EdgeRIC-A-real-time-RIC/srs-4G-UE/build && $(MAKE) -f CMakeFiles/Makefile2 lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/rule
+.PHONY : lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/rule
+
+# Convenience name for target.
+srsran_rf_zmq: lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/rule
+
+.PHONY : srsran_rf_zmq
+
+# fast build rule for target.
+srsran_rf_zmq/fast:
+	cd /home/EdgeRIC-A-real-time-RIC/srs-4G-UE/build && $(MAKE) -f lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/build.make lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/build
+.PHONY : srsran_rf_zmq/fast
+
+# Convenience name for target.
 lib/src/phy/rf/CMakeFiles/srsran_rf_object.dir/rule:
 	cd /home/EdgeRIC-A-real-time-RIC/srs-4G-UE/build && $(MAKE) -f CMakeFiles/Makefile2 lib/src/phy/rf/CMakeFiles/srsran_rf_object.dir/rule
 .PHONY : lib/src/phy/rf/CMakeFiles/srsran_rf_object.dir/rule
@@ -263,21 +293,6 @@ rf_file_test: lib/src/phy/rf/CMakeFiles/rf_file_test.dir/rule
 rf_file_test/fast:
 	cd /home/EdgeRIC-A-real-time-RIC/srs-4G-UE/build && $(MAKE) -f lib/src/phy/rf/CMakeFiles/rf_file_test.dir/build.make lib/src/phy/rf/CMakeFiles/rf_file_test.dir/build
 .PHONY : rf_file_test/fast
-
-# Convenience name for target.
-lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/rule:
-	cd /home/EdgeRIC-A-real-time-RIC/srs-4G-UE/build && $(MAKE) -f CMakeFiles/Makefile2 lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/rule
-.PHONY : lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/rule
-
-# Convenience name for target.
-srsran_rf_zmq: lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/rule
-
-.PHONY : srsran_rf_zmq
-
-# fast build rule for target.
-srsran_rf_zmq/fast:
-	cd /home/EdgeRIC-A-real-time-RIC/srs-4G-UE/build && $(MAKE) -f lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/build.make lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/build
-.PHONY : srsran_rf_zmq/fast
 
 rf_file_imp.o: rf_file_imp.c.o
 
@@ -413,6 +428,33 @@ rf_imp.s: rf_imp.c.s
 rf_imp.c.s:
 	cd /home/EdgeRIC-A-real-time-RIC/srs-4G-UE/build && $(MAKE) -f lib/src/phy/rf/CMakeFiles/srsran_rf_object.dir/build.make lib/src/phy/rf/CMakeFiles/srsran_rf_object.dir/rf_imp.c.s
 .PHONY : rf_imp.c.s
+
+rf_uhd_imp.o: rf_uhd_imp.cc.o
+
+.PHONY : rf_uhd_imp.o
+
+# target to build an object file
+rf_uhd_imp.cc.o:
+	cd /home/EdgeRIC-A-real-time-RIC/srs-4G-UE/build && $(MAKE) -f lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir/build.make lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir/rf_uhd_imp.cc.o
+.PHONY : rf_uhd_imp.cc.o
+
+rf_uhd_imp.i: rf_uhd_imp.cc.i
+
+.PHONY : rf_uhd_imp.i
+
+# target to preprocess a source file
+rf_uhd_imp.cc.i:
+	cd /home/EdgeRIC-A-real-time-RIC/srs-4G-UE/build && $(MAKE) -f lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir/build.make lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir/rf_uhd_imp.cc.i
+.PHONY : rf_uhd_imp.cc.i
+
+rf_uhd_imp.s: rf_uhd_imp.cc.s
+
+.PHONY : rf_uhd_imp.s
+
+# target to generate assembly for a file
+rf_uhd_imp.cc.s:
+	cd /home/EdgeRIC-A-real-time-RIC/srs-4G-UE/build && $(MAKE) -f lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir/build.make lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir/rf_uhd_imp.cc.s
+.PHONY : rf_uhd_imp.cc.s
 
 rf_utils.o: rf_utils.c.o
 
@@ -558,14 +600,15 @@ help:
 	@echo "... install/strip"
 	@echo "... install/local"
 	@echo "... srsran_rf_utils"
+	@echo "... srsran_rf_uhd"
+	@echo "... install"
+	@echo "... srsran_rf_zmq"
 	@echo "... srsran_rf_object"
 	@echo "... srsran_rf"
 	@echo "... rf_zmq_test"
 	@echo "... rf_file_test"
 	@echo "... package"
 	@echo "... list_install_components"
-	@echo "... srsran_rf_zmq"
-	@echo "... install"
 	@echo "... package_source"
 	@echo "... test"
 	@echo "... rebuild_cache"
@@ -585,6 +628,9 @@ help:
 	@echo "... rf_imp.o"
 	@echo "... rf_imp.i"
 	@echo "... rf_imp.s"
+	@echo "... rf_uhd_imp.o"
+	@echo "... rf_uhd_imp.i"
+	@echo "... rf_uhd_imp.s"
 	@echo "... rf_utils.o"
 	@echo "... rf_utils.i"
 	@echo "... rf_utils.s"

@@ -83,6 +83,7 @@ srsgnb/src/stack/mac/test/sched_nr_prb_test: srsgnb/src/stack/mac/libsrsgnb_mac.
 srsgnb/src/stack/mac/test/sched_nr_prb_test: lib/src/common/libsrsran_common.a
 srsgnb/src/stack/mac/test/sched_nr_prb_test: lib/src/asn1/librrc_nr_asn1.a
 srsgnb/src/stack/mac/test/sched_nr_prb_test: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+srsgnb/src/stack/mac/test/sched_nr_prb_test: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 srsgnb/src/stack/mac/test/sched_nr_prb_test: lib/src/asn1/libasn1_utils.a
 srsgnb/src/stack/mac/test/sched_nr_prb_test: srsenb/src/stack/mac/common/libsrsenb_mac_common.a
 srsgnb/src/stack/mac/test/sched_nr_prb_test: lib/src/mac/libsrsran_mac.a
