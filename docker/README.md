@@ -72,7 +72,7 @@ docker exec -it open5gs_5gc iperf -c 10.45.1.3 -u -i 1 -b 10M -t 1000
 
 # Try out EdgeRIC muApps
 You need to run the following from inside the srsRAN gnb container ``docker exec -it edgeric_v2 bash``  
-## Run the scheduling muApp
+## muApp1: Run the scheduling muApp
 **Terminal 9: Set the scheduling algorithm**  
 ```bash
 docker exec -it edgeric_v2 bash
@@ -128,3 +128,41 @@ Executing RL model at: ./rl_model/fully_trained_model
 total system throughput: 11.743776 
 ```
 
+## muApp3 - Running the Monitoring muApp
+This muApp will help us see the RT-E2 Report Message from the RAN and the RT-E2 Policy message sent to RAN  
+
+```bash
+docker exec -it edgeric_v2 bash
+cd muApp3
+python3 muApp3_monitor_terminal.py 
+```
+**What to observe**  
+```bash
+RT-E2 Report: 
+
+RAN Index: 791000, RIC index: 790998 
+
+UE Dictionary: {70: {'CQI': 7, 'SNR': 115.46858215332031, 'Backlog': 384977, 'Pending Data': 0, 'Tx_brate': 1980.0, 'Rx_brate': 0.0}, 71: {'CQI': 8, 'SNR': 116.41766357421875, 'Backlog': 1503, 'Pending Data': 0, 'Tx_brate': 0.0, 'Rx_brate': 0.0}} 
+
+```
+
+## Try out fixed weight scheduling and MCS control - Build your policies on top of these helper files
+Edit the python files to chose fixed scheduling and mcs actions  
+```bash
+docker exec -it edgeric_v2 bash
+python3 send_mcs.py
+```
+
+```bash
+docker exec -it edgeric_v2 bash
+sudo python3 send_weight.py
+```
+**What will you see**
+```bash
+RT-E2 Policy (Scheduling): 
+Sent to RAN: ran_index: 790999
+weights: 70.0
+weights: 0.7
+weights: 71.0
+weights: 0.3
+``` 
