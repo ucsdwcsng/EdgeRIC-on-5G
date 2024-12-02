@@ -16,13 +16,13 @@ class SendWeight:
     
     def generate_weight_array(self, ue_dict):
         weight_array = []
-        weight_array = [
-        17921, 0.7,  # RNTI 4601 with weight 0.7
-        17922, 0.3,  # RNTI 4602 with weight 0.3  # RNTI 1003 with weight 0.2
-        ]   
-        # for rnti in ue_dict.keys():
-        #     weight_value = np.random.rand()
-        #     weight_array.extend([rnti, weight_value])
+        # weight_array = [
+        # 17921, 0.7,  # RNTI 4601 with weight 0.7
+        # 17922, 0.3,  # RNTI 4602 with weight 0.3  # RNTI 1003 with weight 0.2
+        # ]   
+        for rnti in ue_dict.keys():
+            weight_value = np.random.rand()
+            weight_array.extend([rnti, weight_value])
 
         return weight_array
 
