@@ -1,3 +1,5 @@
+Refer to ``docker/`` for the multi container solution  
+
 ## Current Implementation
 ![Image 1](./images/ER-09-09-24.png "This is image ER")  
 
