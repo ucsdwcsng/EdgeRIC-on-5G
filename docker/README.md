@@ -8,9 +8,15 @@ This folder contains a multi-container application (development mode), composed 
 
 ## Start the containers 
  
-**Terminal 1: Launch the open5gs Core Network** 
+**Terminal 0: Launch the open5gs Core Network** 
 ```bash
 docker-compose up --build 5gc
+```
+**Terminal 1: Connect your network to the internet**  
+```bash
+docker exec -it open5gs_5gc bash
+sysctl -w net.ipv4.ip_forward=1
+iptables -t nat -A POSTROUTING -s 10.45.1.0/16 ! -o ogstun -j MASQUERADE
 ```
 
 **Terminal 2: Start the Radio Access Network container** 
@@ -165,4 +171,43 @@ weights: 70.0
 weights: 0.7
 weights: 71.0
 weights: 0.3
-``` 
+```
+
+# Dashboard Support with Grafana
+## Prometheus and Grafana
+Start the prometheus data base and the grafana dashboard containers
+```bash
+cd prometheus
+docker compose up prometheus
+```
+
+```bash
+cd grafana
+docker compose up grafana
+```
+## Create the Docker network between edgeric, prometheus and grafana
+```bash
+docker network create monitoring
+docker network connect monitoring prometheus
+docker network connect monitoring edgeric_v2
+docker network connect monitoring grafana
+```
+check https://localhost:3000 web whether Grafana can run correctly  
+
+## Pulling Metrics with edgeric rt-e2 agent 
+From the edgeric container, start the monitoring_grafana muApp 
+```bash
+docker exec -it edgeric_v2 bash
+cd muApp3
+python3 muApp3_monitor_grafana.py
+```
+check https://localhost:9090 web whether Prometheus can run correctly  
+check https://localhost:8000 - edgeric muApp writes the metrics here, for Prometheus  
+
+## Opening the Dashboard 
+Step 1: https://localhost:3000 - Dashboard  
+Step 2: Important the dashboard provided in the repository - located in ``grafana/dashboard.json``
+Step 3: Add data source 
+
+
+
