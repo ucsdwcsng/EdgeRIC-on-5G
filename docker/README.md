@@ -206,8 +206,8 @@ check https://localhost:8000 - edgeric muApp writes the metrics here, for Promet
 
 ## Opening the Dashboard 
 Step 1: https://localhost:3000 - Dashboard  
-Step 2: Important the dashboard provided in the repository - located in ``grafana/dashboard.json``
-Step 3: Add data source 
+Step 2: Important the dashboard provided in the repository - located in ``grafana/dashboard.json``  
+Step 3: Add data source   
 
 
 
