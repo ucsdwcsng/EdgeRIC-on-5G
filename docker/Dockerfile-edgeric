@@ -38,6 +38,7 @@ RUN apt-get update
 RUN apt-get install -y libgtest-dev
 
 RUN pip3 install --upgrade pip
+RUN pip3 install prometheus_client
 RUN pip3 install gym pandas torchvision tensorboard redis debugpy ray gymnasium dm_tree pyarrow typer scikit-image plotly
 RUN pip3 install hydra-core==1.1.0
 RUN pip3 uninstall -y protobuf

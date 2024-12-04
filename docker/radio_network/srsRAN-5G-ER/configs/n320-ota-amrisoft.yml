@@ -5,7 +5,7 @@ amf:
                                           # A local IP that the gNB binds to for traffic from the AMF.
 ru_sdr:
   device_driver: uhd                  # The RF driver name.
-  device_args: "addr=192.168.101.15,master_clock_rate=245.76e6" #ip_addr=192.168.101.15, master_clock_rate = 245.76e6             # Optionally pass arguments to the selected RF driver.
+  device_args: "addr=192.168.11.2,master_clock_rate=245.76e6" #ip_addr=192.168.101.15, master_clock_rate = 245.76e6             # Optionally pass arguments to the selected RF driver.
   clock:                         # Specify the clock source used by the RF.
   sync:                          # Specify the sync source used by the RF.
   srate: 61.44                        # RF sample rate might need to be adjusted according to selected bandwidth.
@@ -14,10 +14,10 @@ ru_sdr:
   tx_gain: 40 #55                         # Transmit gain of the RF might need to adjusted to the given situation.
   rx_gain: 40 #60                         # Receive gain of the RF might need to adjusted to the given situation.
 cell_cfg:
-  dl_arfcn: 536020 #627340                                              # ARFCN of the downlink carrier (center frequency).
-  band: 7 #78                                                      # The NR band.
+  dl_arfcn: 627340 #536020 #627340                                              # ARFCN of the downlink carrier (center frequency).
+  band: 78 #7 #78                                                      # The NR band.
   channel_bandwidth_MHz: 20                                     # Bandwith in MHz. Number of PRBs will be automatically derived.
-  common_scs: 15 #30                                                # Subcarrier spacing in kHz used for data.
+  common_scs: 30 #15 #30                                                # Subcarrier spacing in kHz used for data.
   plmn: "00101"                                                 # PLMN broadcasted by the gNB.
   tac: 7                                                        # Tracking area code (needs to match the core configuration).
   pci: 1 

@@ -11,7 +11,7 @@ BuildDirectory: /home/EdgeRIC-A-real-time-RIC/srs-4G-UE/build
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: 8b5c45639612
+Site: 3650e72c9855
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
 BuildName: Linux-c++

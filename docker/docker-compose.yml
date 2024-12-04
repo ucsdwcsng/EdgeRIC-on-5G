@@ -35,7 +35,7 @@ services:
     # Uncomment port to use the 5gc from outside the docker network
     #  - "38412:38412/sctp"
     #  - "2152:2152/udp"
-    command: 5gc -c open5gs-5gc.yml
+    command: 5gc -c open5gs-5gc.yml 
     healthcheck:
       test: [ "CMD-SHELL", "nc -z 127.0.0.20 7777" ]
       interval: 3s
@@ -85,8 +85,6 @@ services:
     networks:
       ran:
         ipv4_address: ${GNB_IP:-10.53.1.3}
-      metrics:
-        ipv4_address: 172.19.1.3
       rt-e2:
           ipv4_address: 10.53.2.4
     # Start GNB container after 5gc is up and running
@@ -109,6 +107,8 @@ services:
         OS_VERSION: "20.04"
     # privileged mode is requred only for accessing usb devices
     privileged: true
+    ports:
+      - "8000:8000"
     # entrypoint: ["/home/EdgeRIC-A-real-time-RIC/srsran_entrypoint.sh"]
     # Extra capabilities always required
     cap_add:
@@ -128,8 +128,6 @@ services:
     # current netowrk configuration creastes a private netwoek with both containers attached
     # An alterantive would be `network: host"`. That would expose your host network into the container. It's the easiest to use if the 5gc is not in your PC
     networks:
-      metrics:
-        ipv4_address: 172.19.1.4
       rt-e2:
         ipv4_address: 10.53.2.5
     # Start GNB container after 5gc is up and running
@@ -208,8 +206,4 @@ networks:
       driver: default
       config:
         - subnet: 10.53.2.0/24
-  metrics:
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.19.1.0/24
+ 

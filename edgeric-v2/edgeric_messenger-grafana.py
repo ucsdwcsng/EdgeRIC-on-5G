@@ -23,6 +23,7 @@ class EdgericMessenger:
         self.subscriber.setsockopt(zmq.CONFLATE, 1)  # Set the socket to conflate mode
         self.subscriber.connect("ipc:///tmp/metrics")  # Connect to the IPC address for metrics (5551)
 
+
         self.socket_type = socket_type
 
         if socket_type == "weights":

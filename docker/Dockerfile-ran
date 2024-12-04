@@ -149,7 +149,7 @@ RUN apt-get update
 RUN apt-get install -y cmake 
 RUN cmake --version
 
-ARG UHD_VERSION="v4.6.0.0"
+ARG UHD_VERSION="v4.7.0.0"
 
 # Clone UHD source code
 WORKDIR /usr/local/src

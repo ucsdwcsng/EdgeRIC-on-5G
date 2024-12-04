@@ -530,7 +530,7 @@ SCTP_INCLUDE_DIRS:PATH=/usr/include
 SCTP_LIBRARIES:FILEPATH=/usr/lib/x86_64-linux-gnu/libsctp.so
 
 //Name of the computer/site where compile is being run
-SITE:STRING=8b5c45639612
+SITE:STRING=3650e72c9855
 
 //Path to a file.
 SKIQ_INCLUDE_DIRS:PATH=SKIQ_INCLUDE_DIRS-NOTFOUND

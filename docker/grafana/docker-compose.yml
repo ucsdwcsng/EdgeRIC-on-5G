@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+     - '3000:3000'
+    environment:
+     - GF_DASHBOARDS_MIN_REFRESH_INTERVAL=50ms
+     - GF_DASHBOARDS_REFRESH_INTERVAL=50ms
+    volumes:
+      - grafana-storage:/var/lib/grafana
+volumes:
+  grafana-storage: {}

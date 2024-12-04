@@ -50,3 +50,6 @@ then
 else
     exec stdbuf -o L $@
 fi
+
+sysctl -w net.ipv4.ip_forward=1
+iptables -t nat -A POSTROUTING -s 10.45.1.0/16 ! -o ogstun -j MASQUERADE
