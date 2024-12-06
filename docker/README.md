@@ -5,6 +5,8 @@ This folder contains a multi-container application (development mode), composed 
 - srsRAN gnb: it will build and run the srsRAN network, gnb and UEs.
 - Open5g core: an open source core to use with srsRAN gnb.
 - EdgeRIC - the realtime RAN controller.
+- Prometheus - Database for Grafana
+- Grafana - Container for the dashboard application  
 
 ## Start the containers 
  
@@ -41,6 +43,13 @@ Once built, Start the GNU radio flowgraph in the same terminal
 ```bash
 python3 2ue-zmq-mode-23.04Mhz-nogui.py # for 2ues, to run 4ues - run python3 4ue-zmq-mode-23.04Mhz-nogui.py
 ```
+**Known Issue - Look out for**
+```bash
+sudo lsof -i :5555
+sudo lsof -i :5556
+sudo lsof -i :5557
+```
+Make sure to kill all these in case it is still active ``sudo kill -9 <PID>``    
 
 **Terminal 4: Run the RAN**
 ```bash
@@ -78,6 +87,15 @@ docker exec -it open5gs_5gc iperf -c 10.45.1.3 -u -i 1 -b 10M -t 1000
 
 # Try out EdgeRIC muApps
 You need to run the following from inside the srsRAN gnb container ``docker exec -it edgeric_v2 bash``  
+
+**Known Issue - Look out for**  
+```bash
+sudo lsof -i :5555
+sudo lsof -i :5556
+sudo lsof -i :5557
+```
+Make sure to kill all these in case it is still active ``sudo kill -9 <PID>``   
+
 ## muApp1: Run the scheduling muApp
 **Terminal 9: Set the scheduling algorithm**  
 ```bash
