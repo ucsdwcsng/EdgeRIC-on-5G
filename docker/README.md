@@ -1,4 +1,4 @@
-# Multi-Container Solution
+# Multi-Container Solution with Dashboard Support
 
 This folder contains a multi-container application (development mode), composed of:
 
