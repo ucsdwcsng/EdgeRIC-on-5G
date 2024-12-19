@@ -45,6 +45,14 @@ cd muApp1
 redis-cli set scheduling_algorithm "Max CQI" # setting an initial scheduler
 python3 muApp1_run_DL_scheduling.py # sudo not required if you ae running in docker
 ```
+
+#### Update the scheduling algorithm
+
+```bash
+redis-cli set scheduling_algorithm "Max Weight" #selection can be: Max CQI, Max Weight,
+                                                # Proportional Fair (PF), Round Robin
+                                                # RL - models are included for 2 UEs
+```
 #### Setting the scheduler algorithm manually
 Set the scheduling algorithm you want to run:
 ```bash
@@ -71,13 +79,7 @@ The respective models are saved in:
       ├──model_demo.pt
 ```
  
-#### Using redis to update the scheduling algorithm
 
-```bash
-redis-cli set scheduling_algorithm "Max Weight" #selection can be: Max CQI, Max Weight,
-                                                # Proportional Fair (PF), Round Robin
-                                                # RL - models are included for 2 UEs
-```
 
 **What to observe**  
 muApp1 terminal will show the algorithms selected and will print the total average system throughput observed
