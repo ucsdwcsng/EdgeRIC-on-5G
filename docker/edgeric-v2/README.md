@@ -36,10 +36,9 @@ sudo python3 send_weight.py
 
 ### Running muApp1 - downlink scheduler
 
-**Weight Based abstraction of control** The scheduling logic in ``srsenb`` is updated to support a weight based abstraction to allocate the number of RBGs to allocate per UE. A weight based abstraction allows us to implement any kind of scheduling policy where we provide a weight ``w_i`` for each UE, the RAN then allocates ``[w_i*available_rbgs]`` RBGs to each UE.     
+**Weight Based abstraction of control** The scheduling logic in ``radio_network/srsRAN-5G-ER`` is updated to support a weight based abstraction to allocate the number of RBGs to allocate per UE. A weight based abstraction allows us to implement any kind of scheduling policy where we provide a weight ``w_i`` for each UE, the RAN then allocates ``[w_i*available_rbgs]`` RBGs to each UE.     
 
 ```bash
-cd edgeric
 cd muApp1
 redis-cli set scheduling_algorithm "Max CQI" # setting an initial scheduler
 python3 muApp1_run_DL_scheduling.py # sudo not required if you ae running in docker
@@ -47,14 +46,15 @@ python3 muApp1_run_DL_scheduling.py # sudo not required if you ae running in doc
 #### Setting the scheduler algorithm manually
 Set the scheduling algorithm you want to run:
 ```bash
-# Line 259
+# Comment out line 294
+# Line 300
 selected_algorithm = "Max CQI"   # selection can be: Max CQI, Max Weight,
                                  # Proportional Fair (PF), Round Robin 
                                  # RL - models are included for 2 UEs
 ```
 If the algorithm selected is RL, set the directory for the RL model
 ```bash
-# Line 270
+# Line 312
 rl_model_name = "Fully Trained Model"  # selection can be Initial Model,
                                        # Half Trained Model, Fully Trained Model - to see benefits, run UE1 with load 5Mbps, UE2 with 21Mbps
 ```
