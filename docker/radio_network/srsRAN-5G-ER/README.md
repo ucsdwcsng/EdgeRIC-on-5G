@@ -48,7 +48,7 @@ File to implement the scheduling decision: ``lib/scheduler/ue_scheduling/ue_cell
 Weight based control of resource allocations per UE (rnti):  
 ```bash
 uint16_t rnti = static_cast<uint16_t>(ue_cc->rnti());
-      std::optional<float> opt_weights_recvd = edgeric::get_weights(rnti);
+      std::optional<float> opt_weights_recvd = edgeric::get_weights(rnti); // Janus hook to go in here
       weights_to_log = opt_weights_recvd.has_value() ? opt_weights_recvd.value() : 0.0f;
 
       if (opt_weights_recvd.has_value()) {
