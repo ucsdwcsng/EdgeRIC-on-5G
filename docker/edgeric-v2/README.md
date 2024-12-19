@@ -1,8 +1,7 @@
 ## Running EdgeRIC 
  
 ```bash
-cd edgeric
-redis-server
+cd edgeric-v2
 ```
 
 ### EdgeRIC messenger
@@ -37,6 +36,9 @@ sudo python3 send_weight.py
 ### Running muApp1 - downlink scheduler
 
 **Weight Based abstraction of control** The scheduling logic in ``radio_network/srsRAN-5G-ER`` is updated to support a weight based abstraction to allocate the number of RBGs to allocate per UE. A weight based abstraction allows us to implement any kind of scheduling policy where we provide a weight ``w_i`` for each UE, the RAN then allocates ``[w_i*available_rbgs]`` RBGs to each UE.     
+```bash
+redis-server
+```
 
 ```bash
 cd muApp1
