@@ -1,3 +1,5 @@
+*.pyc
+*.swp
 srsRAN-5G-ER/build
 srs-4G-UE/build
 edgeric-v2/muApp2/outputs
