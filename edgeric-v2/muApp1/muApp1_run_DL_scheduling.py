@@ -1,3 +1,4 @@
+import json
 import argparse
 import os
 import pickle
@@ -17,6 +18,19 @@ import time
 import torch
 import redis
 from edgeric_messenger import EdgericMessenger
+
+import models.mlp_policy
+
+class MyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.integer):
+            return int(obj)
+        elif isinstance(obj, np.floating):
+            return float(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        else:
+            return super(MyEncoder, self).default(obj)
 
 total_brate = []
 avg_CQIs  = []
@@ -234,8 +248,13 @@ def algo4_roundrobin_multi(rr_cnt):
 def eval_loop_model(num_episodes, out_dir):
     output_dir = out_dir 
     global total_brate
-    
-    model = torch.load(os.path.join(output_dir, "model_demo.pt"), map_location=torch.device('cpu'))
+    # torch.serialization.add_safe_globals([Policy])
+    #model = torch.load(os.path.join(output_dir, "model_demo.pt"), map_location=torch.device('cpu'))
+
+
+    model = torch.load(os.path.join(output_dir, "model_demo.pt"), map_location=torch.device('cpu'), weights_only=False)
+    torch.serialization.add_safe_globals([models.mlp_policy.Policy])
+
     model.eval()
 
     for episode in range(num_episodes):
@@ -245,7 +264,7 @@ def eval_loop_model(num_episodes, out_dir):
 
         CQIs = [data['cqi'] for data in ue_data.values()]
         RNTIs = list(ue_data.keys())
-        BLs = [data['ul_buffer'] for data in ue_data.values()]
+        BLs = [data['dl_buffer'] for data in ue_data.values()]
         mbs = np.ones(numues) * 300000
         txb = [data['tx_bytes'] for data in ue_data.values()]
         brate = np.sum(txb)
@@ -266,14 +285,33 @@ def eval_loop_model(num_episodes, out_dir):
         with torch.no_grad():
             action = model.select_action(obs)
             action = torch.squeeze(action)
-        
+
+        ue_data['percentage_RBG'] = np.zeros(numues)
+        ue_data['weight'] = np.zeros(numues*2)
         for ue in range(numues):
             percentage_RBG = action[ue] / sum(action)
+            ue_data['percentage_RBG'][ue] = percentage_RBG.numpy()
             weight[ue*2+1] = percentage_RBG
+            ue_data['weight'][ue*2+1] = weight[ue*2+1]
             weight[ue*2] = RNTIs[ue]
+            ue_data['weight'][ue*2] = weight[ue*2]
 
-        edgeric_messenger.send_scheduling_weight(ran_tti, weight, False) 
-    
+        edgeric_messenger.send_scheduling_weight(ran_tti, weight, False)
+
+        ue_data['obs'] = list(obs[0].data.numpy())
+        ue_data['action'] = list(action.numpy())
+
+        ari_data_dict_rl['data'].append(ue_data)
+
+    with open('test_dict_rl.json', 'w') as f:
+        # None
+        # f.write('{'+str(ue_dict)+'},'+'\n')
+        # dic = json.load(f)
+        # dic.update(ue_dict)
+        # dic['data'].append(ue_dict)
+        json.dump(ari_data_dict_rl, f, indent=2, cls=MyEncoder)
+
+
 #################
 algorithm_mapping = {
     "Fixed Weight": 0,
@@ -294,6 +332,7 @@ rl_model_mapping = {
 redis_db = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
 
 if __name__ == "__main__":
+    ari_data_dict_rl = {'data': []}
     try:
         while True:
             try:
