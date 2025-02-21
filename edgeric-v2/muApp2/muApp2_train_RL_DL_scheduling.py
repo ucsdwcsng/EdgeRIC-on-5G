@@ -153,8 +153,61 @@ def main(conf):
     # edgeric_messenger = EdgericMessenger(socket_type="weights")
 
     def update_params(batch, i_iter):
-        # Your code for updating parameters remains the same...
-        pass
+        states = torch.from_numpy(np.stack(batch.state)).to(dtype).to(device)
+        actions = torch.from_numpy(np.stack(batch.action)).to(dtype).to(device)
+        rewards = torch.from_numpy(np.stack(batch.reward)).to(dtype).to(device)
+        masks = torch.from_numpy(np.stack(batch.mask)).to(dtype).to(device)
+        with torch.no_grad():
+            values = value_net(states)
+            fixed_log_probs = policy_net.get_log_prob(states, actions)
+
+        """get advantage estimation from the trajectories"""
+        advantages, returns = estimate_advantages(
+            rewards, masks, values, args.gamma, args.tau, device
+        )
+
+        """perform mini-batch PPO update"""
+        optim_iter_num = int(math.ceil(states.shape[0] / optim_batch_size))
+        for _ in range(optim_epochs):
+            perm = np.arange(states.shape[0])
+            np.random.shuffle(perm)
+            perm = LongTensor(perm).to(device)
+
+            states, actions, returns, advantages, fixed_log_probs = (
+                states[perm].clone(),
+                actions[perm].clone(),
+                returns[perm].clone(),
+                advantages[perm].clone(),
+                fixed_log_probs[perm].clone(),
+            )
+
+            for i in range(optim_iter_num):
+                ind = slice(
+                    i * optim_batch_size,
+                    min((i + 1) * optim_batch_size, states.shape[0]),
+                )
+                states_b, actions_b, advantages_b, returns_b, fixed_log_probs_b = (
+                    states[ind],
+                    actions[ind],
+                    advantages[ind],
+                    returns[ind],
+                    fixed_log_probs[ind],
+                )
+
+                ppo_step(
+                    policy_net,
+                    value_net,
+                    optimizer_policy,
+                    optimizer_value,
+                    1,
+                    states_b,
+                    actions_b,
+                    returns_b,
+                    advantages_b,
+                    fixed_log_probs_b,
+                    args.clip_epsilon,
+                    args.l2_reg,
+                )
 
     def main_loop():
         hydra_cfg = hydra.core.hydra_config.HydraConfig.get()
@@ -188,7 +241,31 @@ def main(conf):
                     )
                 )
 
-            # Your model saving code remains the same...
+            if (
+                args.save_model_interval > 0
+                and (i_iter + 1) % args.save_model_interval == 0
+            ):
+                to_device(torch.device("cpu"), policy_net, value_net)
+                pickle.dump(
+
+                    (policy_net, value_net, running_state),
+                    open(
+                        os.path.join(
+                            assets_dir(),
+                            "learned_models/{}_ppo.p".format(args.env_name),
+                        ),
+                        "wb",
+                    ),
+                )
+                to_device(device, policy_net, value_net)
+
+            if max(ppo_rewards) == log_eval["avg_reward"]/5000:
+                torch.save(policy_net, os.path.join(output_dir, "model_best.pt"))
+
+            if i_iter == 1 or i_iter == 15:
+                filename = f"model_{i_iter}.pt"
+                model_path = os.path.join(output_dir, filename)
+                torch.save(policy_net, model_path)
 
             torch.cuda.empty_cache()
         return ppo_rewards
