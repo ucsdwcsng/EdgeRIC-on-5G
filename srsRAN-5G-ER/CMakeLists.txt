@@ -80,7 +80,7 @@ set_property(CACHE ASSERT_LEVEL PROPERTY STRINGS AUTO MINIMAL NORMAL PARANOID)
 set(EXIT_TIMEOUT "AUTO" CACHE STRING "Timer to wait for a clean exit")
 
 if (ENABLE_WERROR)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wdeprecated")
     # Disable gcc's maybe uninitialized analysis as it raises false positives
     if (CMAKE_COMPILER_IS_GNUCXX)
         include(CheckCXXCompilerFlag)

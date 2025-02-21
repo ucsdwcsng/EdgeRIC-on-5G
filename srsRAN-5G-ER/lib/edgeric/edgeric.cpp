@@ -25,7 +25,7 @@ std::map<uint16_t, uint8_t> edgeric::mcs_recved = {};
 //     {17922, 15}   // Example: RNTI 1002 with an MCS value of 18
 // };
 
-bool edgeric::enable_logging = false; // Initialize logging flag to false
+bool edgeric::enable_logging = true; // Initialize logging flag to false
 bool edgeric::initialized = false;
 
 zmq::context_t context;
@@ -43,6 +43,7 @@ void edgeric::init() {
     // subscriber_weights.setsockopt(ZMQ_SUBSCRIBE, "", 0);
     int conflate = 1;
     subscriber_weights.setsockopt(ZMQ_CONFLATE, &conflate, sizeof(conflate));
+    //subscriber_weights.set(zmq::sockopt::subscribe, "foo123")
     // zmq_setsockopt(subscriber_weights, ZMQ_CONFLATE, &conflate, sizeof(conflate));
 
 
